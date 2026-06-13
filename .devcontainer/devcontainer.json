@@ -1,0 +1,21 @@
+{
+  "name": "CFC Fastfood",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "postCreateCommand": "cd database && npm install && npm run seed && cd ../backend && npm install && cd ../frontend && npm install",
+  "postStartCommand": "cd database && node seed.js",
+  "forwardPorts": [3000, 5000],
+  "portsAttributes": {
+    "3000": { "label": "Frontend", "onAutoForward": "openBrowser" },
+    "5000": { "label": "Backend API", "onAutoForward": "silent" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "dsznajder.es7-react-js-snippets",
+        "bradlc.vscode-tailwindcss"
+      ]
+    }
+  }
+}
