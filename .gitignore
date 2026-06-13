@@ -1,0 +1,11 @@
+node_modules/
+.cache/
+next-env.d.ts
+*.db
+*.db-shm
+*.db-wal
+backend/.env
+.DS_Store
+Thumbs.db
+dist/
+.next/

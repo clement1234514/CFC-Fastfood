@@ -1,0 +1,21 @@
+<svg viewBox="0 0 280 300" width="280" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="badge">
+      <rect x="18" y="18" width="244" height="264" rx="24" ry="24" />
+    </clipPath>
+  </defs>
+
+  <rect x="18" y="18" width="244" height="264" rx="24" ry="24" fill="white" />
+
+  <rect x="18"  y="18" width="82"  height="170" fill="#2E7D2E" clip-path="url(#badge)" />
+  <rect x="100" y="18" width="80"  height="170" fill="#CE1126" clip-path="url(#badge)" />
+  <rect x="180" y="18" width="82"  height="170" fill="#FCDD09" clip-path="url(#badge)" />
+
+  <polygon points="140,61 151.1,92.6 184.5,92.9 157.9,113.2 168.1,146.2 140,127 111.9,146.2 122.1,113.2 95.5,92.9 128.9,92.6" fill="#FCDD09" stroke="#C8A800" stroke-width="1.5" />
+
+  <line x1="18" y1="188" x2="262" y2="188" stroke="#d0d0d0" stroke-width="1" />
+
+  <text x="140" y="255" text-anchor="middle" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="60" letter-spacing="-1" fill="#111111">CFC</text>
+
+  <rect x="18" y="18" width="244" height="264" rx="24" ry="24" fill="none" stroke="#2E7D2E" stroke-width="7" />
+</svg>

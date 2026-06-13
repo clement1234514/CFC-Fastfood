@@ -1,0 +1,14 @@
+{
+  "name": "cfc-database",
+  "version": "1.0.0",
+  "description": "Cameroon Fried Chicken - Database Layer",
+  "main": "db.js",
+  "scripts": {
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.0.0",
+    "uuid": "^10.0.0"
+  }
+}
