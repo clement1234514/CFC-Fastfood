@@ -4,6 +4,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const server = http.createServer(app);
@@ -47,6 +48,13 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
+
+const dbPath = path.join(__dirname, '..', 'database', 'cfc.db');
+if (!fs.existsSync(dbPath)) {
+  console.log('Premier démarrage - initialisation de la base de données...');
+  require('../database/seed');
+}
+
 server.listen(PORT, () => {
-  console.log(`🚀 CFC API en ligne sur http://localhost:${PORT}`);
+  console.log(`CFC API en ligne sur http://localhost:${PORT}`);
 });
