@@ -3,6 +3,17 @@
 
   Online-Bestellplattform für **Cameroon Fried Chicken (CFC)**, ein an den kamerunischen Markt angepasstes Fast-Food-Restaurant mit Mobile Money, Lieferung in Zonen (Douala & Yaoundé) und lokaler Speisekarte.
 
+  ## Live-Demo
+
+  Die Plattform ist online auf **Render** verfügbar:
+
+  | Dienst | URL |
+  |--------|-----|
+  | **Frontend (Webseite)** | https://cfc-frontend.onrender.com |
+  | **Backend-API (Healthcheck)** | https://cfc-backend-xs0d.onrender.com/api/health |
+
+  > Hinweis: Im Render-Freipaket schläft die Instanz nach längerer Inaktivität. Der erste Aufruf kann daher 30–60 Sekunden dauern.
+
   ## Technologie-Stack
 
   | Ebene | Technologie |
@@ -311,15 +322,15 @@
   | Variable | Wo | Beschreibung |
   |----------|-----|--------------|
   | `PORT` | `backend/.env` | API-Server-Port (Standard: 5000) |
-  | `JWT_SECRET` | `backend/.env` | Geheimer Schlüssel für JWT-Signatur |
+  | `JWT_SECRET` | `backend/.env` / Render | Geheimer Schlüssel für JWT-Signatur (Fallback eingebaut) |
   | `NODE_ENV` | `backend/.env` | Umgebung (development/production) |
-  | `NEXT_PUBLIC_API_URL` | Frontend | API-URL (Standard: http://localhost:5000) |
-  | `NEXT_PUBLIC_SOCKET_URL` | Frontend | Socket.IO-Server-URL (Standard: http://localhost:5000) |
+  | `BACKEND_URL` | Render (Frontend) | API-URL aus Sicht des Frontend-Servers (z.B. https://cfc-backend-xs0d.onrender.com) |
+  | `NEXT_PUBLIC_SOCKET_URL` | Render (Frontend) | Socket.IO-Server-URL (z. B. https://cfc-backend-xs0d.onrender.com) |
 
   ### Produktionsverfahren
 
-  1. **Datenbank**: `database/cfc.db` kopieren oder `npm run seed` auf dem Server ausführen
-  2. **Backend**: `npm start` mit PM2 oder systemd
-  3. **Frontend**: `next build` → `next start -p 3000`
-  4. **Proxy**: Nginx oder Caddy für Frontend-Auslieferung + Weiterleitung von `/api/*` an das Backend
-  5. **HTTPS**: SSL-Zertifikat (Let's Encrypt) für sichere Verbindungen
+  1. **Repository** auf GitHub pushen (`github.com/clement1234514/CFC-Fastfood`)
+  2. **Render Blueprint** (`render.yaml`) legt zwei Dienste an: Frontend und Backend
+  3. **Backend**: Wird automatisch gestartet; die Datenbank wird beim ersten Start automatisch initialisiert (Seed). Freier Tier → Datenbank liegt auf temporärem Dateisystem und wird bei jedem Deploy neu befüllt.
+  4. **Frontend**: `next build` → `next start`; der Next.js-Server leitet `/api/*` per Reverse-Proxy (Rewrites) an `BACKEND_URL` weiter – dadurch funktioniert die API ohne Client-seitiges Build-Env.
+  5. **HTTPS**: Von Render automatisch bereitgestellt.
