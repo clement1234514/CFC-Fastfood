@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import apiFetch from '../../../utils/api';
+import { SOCKET_URL } from '../../../utils/socket';
 import { io } from 'socket.io-client';
 
 const statusConfig = {
@@ -26,7 +27,7 @@ export default function OrderDetail() {
 
   useEffect(() => {
     if (!user) { router.push('/login'); return; }
-    const socket = io('http://localhost:5000');
+    const socket = io(SOCKET_URL);
     socket.emit('join-order', params.id);
 
     socket.on('order-update', (data) => {

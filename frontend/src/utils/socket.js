@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 
 const rawSocket = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:5000';
-const SOCKET_URL = rawSocket.startsWith('http') ? rawSocket : `https://${rawSocket}`;
+export const SOCKET_URL = rawSocket.startsWith('http') ? rawSocket : `https://${rawSocket}`;
 
 export function useSocket(orderId) {
   const socketRef = useRef(null);

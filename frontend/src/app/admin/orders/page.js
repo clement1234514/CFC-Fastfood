@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { io } from 'socket.io-client';
 import apiFetch from '../../../utils/api';
+import { SOCKET_URL } from '../../../utils/socket';
 
 const statusColors = { 'en_attente': 'warning', 'payee': 'info', 'en_preparation': 'primary', 'livraison': 'orange', 'terminee': 'success', 'annulee': 'danger' };
 const statusLabels = { 'en_attente': 'En attente', 'payee': 'Payée', 'en_preparation': 'En préparation', 'livraison': 'En livraison', 'terminee': 'Terminée', 'annulee': 'Annulée' };
@@ -24,7 +25,7 @@ export default function AdminOrders() {
       return;
     }
 
-    const socket = io('http://localhost:5000');
+    const socket = io(SOCKET_URL);
     socket.emit('join-admin');
 
     socket.on('new-order', (order) => {
