@@ -1,4 +1,5 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const rawBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const API_BASE = rawBase.startsWith('http') ? rawBase : `https://${rawBase}`;
 
 export async function apiFetch(endpoint, options = {}) {
   const controller = new AbortController();

@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: cfc-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    disk:
+      name: cfc-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_PATH
+        value: /data/cfc.db
+
+  - type: web
+    name: cfc-frontend
+    runtime: node
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: cfc-backend
+          property: host
+      - key: NEXT_PUBLIC_SOCKET_URL
+        fromService:
+          type: web
+          name: cfc-backend
+          property: host

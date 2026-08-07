@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 5000;
 
-const dbPath = path.join(__dirname, '..', 'database', 'cfc.db');
+const dbPath = process.env.DB_PATH || path.join(__dirname, '..', 'database', 'cfc.db');
 if (!fs.existsSync(dbPath)) {
   console.log('Premier démarrage - initialisation de la base de données...');
   require('../database/seed');
